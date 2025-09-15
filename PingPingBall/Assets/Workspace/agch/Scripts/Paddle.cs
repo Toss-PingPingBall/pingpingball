@@ -2,57 +2,76 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    [Header("Speed Multipliers")]
-    public float tipMultiplier = 1.5f; // ÆĞµé ³¡ ºÎºĞ ¹èÀ² [cite: 98]
-    public float middleMultiplier = 1.2f; // ÆĞµé Áß°£ ºÎºĞ ¹èÀ² [cite: 99]
+    [Header("Paddle Identity")]
+    [Tooltip("ì´ íŒ¨ë“¤ì´ ì™¼ìª½ íŒ¨ë“¤ì´ë©´ ì²´í¬í•˜ì„¸ìš”.")]
+    public bool isLeftPaddle;
+
+    [Header("Bonus Kick Settings")]
+    public float tipBonusForce = 8f;
+    public float middleBonusForce = 4f;
+    [Tooltip("ì´ ê°’ë³´ë‹¤ ê°•í•˜ê²Œ ë¶€ë”ªí˜€ì•¼ ë³´ë„ˆìŠ¤ í‚¥ì´ ë°œë™ë©ë‹ˆë‹¤.")]
+    public float minImpactVelocity = 1f;
 
     [Header("Zone Definition")]
-    [Tooltip("ÇÇº¿À¸·ÎºÎÅÍ ÀÌ °Å¸®º¸´Ù ¸Ö¸é '³¡'À¸·Î °£ÁÖ")]
-    public float tipZoneThreshold = 1.2f; // ¿¹½Ã °ª, ÆĞµé ±æÀÌ¿¡ ¸Â°Ô Á¶Àı ÇÊ¿ä
-    [Tooltip("ÇÇº¿À¸·ÎºÎÅÍ ÀÌ °Å¸®º¸´Ù ¸Ö¸é 'Áß°£'À¸·Î °£ÁÖ")]
-    public float middleZoneThreshold = 0.5f; // ¿¹½Ã °ª, ÆĞµé ±æÀÌ¿¡ ¸Â°Ô Á¶Àı ÇÊ¿ä
+    public float tipZoneThreshold = 1.2f;
+    public float middleZoneThreshold = 0.5f;
 
     private HingeJoint2D hingeJoint;
 
     void Start()
     {
-        // ÀÚ½ÅÀÇ HingeJoint2D ÄÄÆ÷³ÍÆ®¸¦ °¡Á®¿È
         hingeJoint = GetComponent<HingeJoint2D>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // ºÎµúÈù ¿ÀºêÁ§Æ®°¡ 'Ball' ÅÂ±×¸¦ °¡Áö°í ÀÖ´ÂÁö È®ÀÎ
-        if (collision.gameObject.CompareTag("Ball"))
+        // --- ì¡°ê±´ 1: íŒ¨ë“¤ì´ 'ê³µì„ ì¹˜ëŠ” ë°©í–¥'ìœ¼ë¡œ ì›€ì§ì´ê³  ìˆëŠ”ê°€? ---
+        bool isMovingUpwards;
+        if (isLeftPaddle)
         {
-            // °øÀÇ BallSpeedManager ½ºÅ©¸³Æ®¸¦ °¡Á®¿È
-            BallSpeedManager ballSpeedManager = collision.gameObject.GetComponent<BallSpeedManager>();
-            if (ballSpeedManager == null) return;
+            // ì™¼ìª½ íŒ¨ë“¤ì€ ëª¨í„° ì†ë„ê°€ ìŒìˆ˜ì¼ ë•Œ ìœ„ë¡œ ì˜¬ë¼ê°
+            isMovingUpwards = hingeJoint.motor.motorSpeed < 0;
+        }
+        else
+        {
+            // ì˜¤ë¥¸ìª½ íŒ¨ë“¤ì€ ëª¨í„° ì†ë„ê°€ ì–‘ìˆ˜ì¼ ë•Œ ìœ„ë¡œ ì˜¬ë¼ê°
+            isMovingUpwards = hingeJoint.motor.motorSpeed > 0;
+        }
 
-            // 1. Ãæµ¹ ÁöÁ¡(World-space)À» °¡Á®¿È
+        if (!isMovingUpwards)
+        {
+            return; // ìœ„ë¡œ ì›€ì§ì´ëŠ” ê²Œ ì•„ë‹ˆë©´ ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•ŠìŒ
+        }
+
+        // --- ì¡°ê±´ 2: ì¶©ëŒ ê°•ë„ê°€ ì¶©ë¶„í•œê°€? ---
+        if (collision.relativeVelocity.magnitude < minImpactVelocity)
+        {
+            return; // ì¶©ê²©ì´ ì•½í•˜ë©´ ì•„ë¬´ê²ƒë„ í•˜ì§€ ì•ŠìŒ
+        }
+
+        // ëª¨ë“  ì¡°ê±´ì„ í†µê³¼í•˜ê³ , ë¶€ë”ªíŒ ê²ƒì´ 'Ball' íƒœê·¸ë¥¼ ê°€ì§„ Rigidbodyë¼ë©´
+        if (collision.gameObject.CompareTag("Ball") && collision.rigidbody != null)
+        {
+            Rigidbody2D ballRigidbody = collision.rigidbody;
+
             Vector2 collisionPoint = collision.contacts[0].point;
-
-            // 2. ÆĞµéÀÇ È¸ÀüÃà(Pivot) À§Ä¡(World-space)¸¦ °è»ê
             Vector2 pivotPoint = transform.TransformPoint(hingeJoint.anchor);
-
-            // 3. È¸ÀüÃà°ú Ãæµ¹ ÁöÁ¡ »çÀÌÀÇ °Å¸®¸¦ °è»ê
             float distanceFromPivot = Vector2.Distance(collisionPoint, pivotPoint);
+            Vector2 forceDirection = collision.contacts[0].normal;
+            float forceMagnitude = 0f;
 
-            // 4. °Å¸®¿¡ µû¶ó ´Ù¸¥ ¼Óµµ ¹èÀ²À» Àû¿ë
             if (distanceFromPivot >= tipZoneThreshold)
             {
-                Debug.Log("Hit Paddle Tip!");
-                ballSpeedManager.MultiplySpeed(tipMultiplier);
+                forceMagnitude = tipBonusForce;
             }
             else if (distanceFromPivot >= middleZoneThreshold)
             {
-                Debug.Log("Hit Paddle Middle!");
-                ballSpeedManager.MultiplySpeed(middleMultiplier);
+                forceMagnitude = middleBonusForce;
             }
-            else
+
+            if (forceMagnitude > 0)
             {
-                Debug.Log("Hit Paddle Base.");
-                // ¾ÈÂÊÀº ¼Óµµ º¯È­ ¾øÀ½ (1.0¹è) [cite: 100]
+                ballRigidbody.AddForce(-forceDirection * forceMagnitude, ForceMode2D.Impulse);
             }
         }
     }

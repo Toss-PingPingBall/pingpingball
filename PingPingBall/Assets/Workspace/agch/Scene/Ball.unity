@@ -653,8 +653,8 @@ GameObject:
   - component: {fileID: 854838968}
   - component: {fileID: 854838969}
   m_Layer: 0
-  m_Name: Circle
-  m_TagString: Untagged
+  m_Name: Ball
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -670,8 +670,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 0.7853982
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
@@ -767,7 +767,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.3554144, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.40566033, b: 0.91637397, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -811,14 +811,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854838963}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f8453caaec5f8c4fb9f9c8978f697d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 0.6
-  maxSpeed: 10
-  initialSpeed: 5
+  maxSpeedLimit: 25
+  speedUpMultiplier: 1.5
+  speedDownMultiplier: 0.7
 --- !u!1 &971291553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1071,7 +1071,7 @@ Transform:
   m_GameObject: {fileID: 1093518910}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3406, y: 5.36, z: 0}
+  m_LocalPosition: {x: 0.3406, y: 5.56, z: 0}
   m_LocalScale: {x: 17.0213, y: 1.0257467, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1093,7 +1093,7 @@ GameObject:
   - component: {fileID: 1165962883}
   m_Layer: 0
   m_Name: Left
-  m_TagString: Untagged
+  m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1231,7 +1231,7 @@ PolygonCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 85bf523324d04e64fa2aa745c5e9ff54, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1283,8 +1283,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac17f9002fde755409803d3b80186d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipMultiplier: 1.5
-  middleMultiplier: 1.2
+  isLeftPaddle: 1
+  tipBonusForce: 5
+  middleBonusForce: 2
+  minImpactVelocity: 10
   tipZoneThreshold: 1.2
   middleZoneThreshold: 0.5
 --- !u!1 &1277887710
@@ -1744,7 +1746,7 @@ GameObject:
   - component: {fileID: 2122100716}
   m_Layer: 0
   m_Name: Right
-  m_TagString: Untagged
+  m_TagString: Paddle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1882,7 +1884,7 @@ PolygonCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 85bf523324d04e64fa2aa745c5e9ff54, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -1934,8 +1936,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac17f9002fde755409803d3b80186d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipMultiplier: 1.5
-  middleMultiplier: 1.2
+  isLeftPaddle: 0
+  tipBonusForce: 5
+  middleBonusForce: 2
+  minImpactVelocity: 10
   tipZoneThreshold: 1.2
   middleZoneThreshold: 0.5
 --- !u!1660057539 &9223372036854775807

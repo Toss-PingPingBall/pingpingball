@@ -13,7 +13,6 @@ public class PaddleController : MonoBehaviour
 
     void Start()
     {
-        // 모터 설정을 미리 받아옵니다.
         leftMotor = leftPaddle.motor;
         rightMotor = rightPaddle.motor;
     }
