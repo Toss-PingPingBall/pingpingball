@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &770971502315240459
+--- !u!1 &3451150835068588772
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,41 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4517198449300834284}
-  - component: {fileID: 4724997747175483207}
+  - component: {fileID: 7445352305497167631}
+  - component: {fileID: 881855824460353826}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: CoinSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4517198449300834284
+--- !u!4 &7445352305497167631
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770971502315240459}
+  m_GameObject: {fileID: 3451150835068588772}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5576152, y: -0.78198665, z: 0.058306813}
+  m_LocalPosition: {x: 0.05077587, y: -0.25997245, z: -10.014339}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4724997747175483207
+--- !u!114 &881855824460353826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 770971502315240459}
+  m_GameObject: {fileID: 3451150835068588772}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c44b797b7d77c94a8c92a2709f7531f, type: 3}
+  m_Script: {fileID: 11500000, guid: 086924ae61c955f40ba432ec6fd3dc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 0}
-  start_ui: {fileID: 0}
+  coinPrefab: {fileID: 8635226913475427131, guid: 90317fb8576258541b968a6284b2da38, type: 3}
+  coinCount: 10
+  spawnAreaMin: {x: -3, y: -5}
+  spawnAreaMax: {x: 3, y: 5}
