@@ -7,6 +7,7 @@ public class GmScript : MonoBehaviour
     public BlockSpawner blockSpawner;
     public ItemSpawner itemSpawner;
     public CoinSpawner coinSpawner;
+    public TMPro.TMP_Text score_ui;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -28,6 +29,9 @@ public class GmScript : MonoBehaviour
     private void initalize()
     {
         start_ui.whenStart += startGame;
+        GameManager.instance.scoreChanged += changeScore;
+        changeScore();
+
         blockSpawner.gameObject.SetActive(false);
         itemSpawner.gameObject.SetActive(false);
         coinSpawner.gameObject.SetActive(false);
@@ -69,5 +73,12 @@ public class GmScript : MonoBehaviour
 
             ballPaused = false;
         }
+    }
+
+    // ======================== Score Display System ==========================
+
+    private void changeScore()
+    {
+        score_ui.text = string.Format("{0:#,##0}", GameManager.instance.score);
     }
 }

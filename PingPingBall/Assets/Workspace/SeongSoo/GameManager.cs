@@ -27,7 +27,10 @@ public class GameManager
 
     // ------ properties ------ 
 
-    public int score { get; private set; }
+    public Action scoreChanged;
+
+    private int _score;
+    public int score { get { return _score; } private set { _score = value; scoreChanged?.Invoke(); } }
     public int allowedRevival { get; private set; }
     public bool onUi { get; set; }
 
