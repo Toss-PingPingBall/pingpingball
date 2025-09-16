@@ -28,6 +28,7 @@ public class GameManager
 
     public int score { get; private set; }
     public int allowedRevival { get; private set; }
+    public bool onUi { get; set; }
 
     // ------ setter ------ 
 
