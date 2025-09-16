@@ -4,11 +4,14 @@ public class GmScript : MonoBehaviour
 {
     public GameObject ball;
     public StartGame start_ui;
+    public BlockSpawner blockSpawner;
+    public ItemSpawner itemSpawner;
+    public CoinSpawner coinSpawner;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        start_ui.whenStart += startGame;
+        initalize();
     }
 
     // Update is called once per frame
@@ -20,11 +23,24 @@ public class GmScript : MonoBehaviour
         processPause();
     }
 
+    // ======================== Game Initializer ==========================
+
+    private void initalize()
+    {
+        start_ui.whenStart += startGame;
+        blockSpawner.gameObject.SetActive(false);
+        itemSpawner.gameObject.SetActive(false);
+        coinSpawner.gameObject.SetActive(false);
+    }
+
     // ======================== Game Starter ==========================
 
     private void startGame()
     {
         start_ui.gameObject.SetActive(false);
+        blockSpawner.gameObject.SetActive(true);
+        itemSpawner.gameObject.SetActive(true);
+        coinSpawner.gameObject.SetActive(true);
     }
 
     // ======================== Pause System ==========================
