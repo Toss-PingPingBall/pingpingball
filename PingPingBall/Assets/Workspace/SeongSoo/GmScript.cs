@@ -3,20 +3,28 @@ using UnityEngine;
 public class GmScript : MonoBehaviour
 {
     public GameObject ball;
-    public GameObject start_ui;
+    public StartGame start_ui;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        GameManager singleton = GameManager.instance;
+        start_ui.whenStart += startGame;
     }
 
     // Update is called once per frame
     void Update()
     {
         // check State
-        
+
         // apply state
+        processPause();
+    }
+
+    // ======================== Game Starter ==========================
+
+    private void startGame()
+    {
+        start_ui.gameObject.SetActive(false);
     }
 
     // ======================== Pause System ==========================

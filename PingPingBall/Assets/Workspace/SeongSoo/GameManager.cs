@@ -20,6 +20,7 @@ public class GameManager
     {
         score = 0;
         allowedRevival = 2;
+        onUi = true;
     }
 
     // ======================== Game System ==========================

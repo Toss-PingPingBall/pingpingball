@@ -4,19 +4,23 @@ using System;
 
 public class StartGame : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private bool doStarted = false;
+    public Action whenStart;
+
+    private void Awake()
     {
-        
+        GameManager.instance.onUi = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (0 < Input.touchCount)
-        {
-            Debug.Log(DateTime.Now.ToString() + " : touch detected");
-            gameObject.SetActive(false);
-        }
+            if (!doStarted)
+            {
+                doStarted = true;
+                GameManager.instance.onUi = false;
+                whenStart();
+            }
     }
 }
