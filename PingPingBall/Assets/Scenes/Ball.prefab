@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7744322680286709464}
   - component: {fileID: 5760191508014650168}
   - component: {fileID: 4635340548606204991}
-  - component: {fileID: 3558847611992470155}
-  - component: {fileID: 5401996422999511205}
+  - component: {fileID: 2688357073996489203}
+  - component: {fileID: 6379487048940176964}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -152,9 +152,9 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &3558847611992470155
+--- !u!114 &2688357073996489203
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,10 +163,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 9170646626669068333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d915f01f413f13a49b20c31e2850d495, type: 3}
+  m_Script: {fileID: 11500000, guid: 179970e875f56f247812f1f29eb871a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5401996422999511205
+--- !u!114 &6379487048940176964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9170646626669068333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f8453caaec5f8c4fb9f9c8978f697d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 69dc45a02afeedb41ac731a013734ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeedLimit: 25
