@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3786130127046182573}
   - component: {fileID: 7828017140365512905}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Paddel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftPaddle: {fileID: 7667888341481758440}
   rightPaddle: {fileID: 5579683217185775363}
-  motorSpeed: 1200
+  motorSpeed: 400
 --- !u!1 &3010881495148934395
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 5579683217185775363}
   - component: {fileID: 6857977850244384868}
   - component: {fileID: 4370902355971860761}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right
   m_TagString: Paddle
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &5579683217185775363
 HingeJoint2D:
@@ -255,12 +255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac17f9002fde755409803d3b80186d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLeftPaddle: 0
-  tipBonusForce: 5
-  middleBonusForce: 2
-  minImpactVelocity: 10
-  tipZoneThreshold: 1.2
-  middleZoneThreshold: 0.5
 --- !u!1 &3952347778286173253
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +269,7 @@ GameObject:
   - component: {fileID: 7667888341481758440}
   - component: {fileID: 1697310855130413383}
   - component: {fileID: 5027475017619271146}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left
   m_TagString: Paddle
   m_Icon: {fileID: 0}
@@ -377,7 +371,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!233 &7667888341481758440
 HingeJoint2D:
@@ -467,9 +461,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac17f9002fde755409803d3b80186d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLeftPaddle: 1
-  tipBonusForce: 5
-  middleBonusForce: 2
-  minImpactVelocity: 10
-  tipZoneThreshold: 1.2
-  middleZoneThreshold: 0.5

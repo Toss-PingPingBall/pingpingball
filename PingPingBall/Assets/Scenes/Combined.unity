@@ -1131,41 +1131,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1501442715}
     m_Modifications:
-    - target: {fileID: 1052201168672136208, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720547090932569309, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720547090932569309, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 9.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720547090932569309, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 7.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 1720547090932569309, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -35.65
-      objectReference: {fileID: 0}
-    - target: {fileID: 2901459636820516611, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3001936760090098748, guid: 21608956e158de94ea4334684b26e126, type: 3}
       propertyPath: m_Name
       value: Paddel
-      objectReference: {fileID: 0}
-    - target: {fileID: 3786130127046182573, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3786130127046182573, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3786130127046182573, guid: 21608956e158de94ea4334684b26e126, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1207,53 +1175,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4370902355971860761, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579683217185775363, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 1.0297797
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579683217185775363, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: -4.0802436
-      objectReference: {fileID: 0}
-    - target: {fileID: 5579683217185775363, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_Motor.m_MaximumMotorForce
+    - target: {fileID: 7828017140365512905, guid: 21608956e158de94ea4334684b26e126, type: 3}
+      propertyPath: motorSpeed
       value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 6821064836212443894, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7667888341481758440, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.9706646
-      objectReference: {fileID: 0}
-    - target: {fileID: 7667888341481758440, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: -4.119534
-      objectReference: {fileID: 0}
-    - target: {fileID: 7667888341481758440, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_Motor.m_MaximumMotorForce
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8508367478877670762, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8508367478877670762, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 9.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8508367478877670762, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 8508367478877670762, guid: 21608956e158de94ea4334684b26e126, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -35.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1642,6 +1566,10 @@ PrefabInstance:
     - target: {fileID: 4635340548606204991, guid: f7f0257ec9129b3488c0b7aa1a01a72a, type: 3}
       propertyPath: m_Mass
       value: 0.06834929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635340548606204991, guid: f7f0257ec9129b3488c0b7aa1a01a72a, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5760191508014650168, guid: f7f0257ec9129b3488c0b7aa1a01a72a, type: 3}
       propertyPath: m_Enabled

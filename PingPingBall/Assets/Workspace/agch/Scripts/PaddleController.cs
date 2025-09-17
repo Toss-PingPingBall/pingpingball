@@ -13,39 +13,60 @@ public class PaddleController : MonoBehaviour
 
     void Start()
     {
+        // 모터 설정을 미리 받아옵니다.
         leftMotor = leftPaddle.motor;
         rightMotor = rightPaddle.motor;
     }
 
     void Update()
     {
-        // 화면에 마우스 클릭(또는 터치)이 있는지 확인
-        if (Input.GetMouseButtonDown(0)) // 0은 마우스 왼쪽 버튼 또는 첫 번째 터치
+        // 1. 매 프레임, 우선 양쪽 패들이 눌렸는지 여부를 false로 초기화합니다.
+        bool leftPressed = false;
+        bool rightPressed = false;
+
+        // 2. 현재 화면의 모든 터치를 검사합니다.
+        if (Input.touchCount > 0)
         {
-            // 클릭된 위치가 화면의 중앙보다 왼쪽에 있는지 확인
-            if (Input.mousePosition.x < Screen.width / 2)
+            foreach (Touch touch in Input.touches)
             {
-                // 왼쪽 패들 움직이기
-                leftMotor.motorSpeed = -motorSpeed; // Hinge Joint의 회전 방향에 따라 부호 조절
-                leftPaddle.motor = leftMotor;
-            }
-            else // 화면 오른쪽에 클릭이 있다면
-            {
-                // 오른쪽 패들 움직이기
-                rightMotor.motorSpeed = motorSpeed; // Hinge Joint의 회전 방향에 따라 부호 조절
-                rightPaddle.motor = rightMotor;
+                // 터치 위치가 왼쪽이면 leftPressed를 true로 설정
+                if (touch.position.x < Screen.width / 2)
+                {
+                    leftPressed = true;
+                }
+                // 터치 위치가 오른쪽이면 rightPressed를 true로 설정
+                else
+                {
+                    rightPressed = true;
+                }
             }
         }
 
-        // 화면에서 손을 뗐을 때 패들을 원위치로
-        if (Input.GetMouseButtonUp(0))
+        // 3. 최종적으로 결정된 상태에 따라 패들 모터를 제어합니다.
+        // 왼쪽이 눌렸다면 (leftPressed == true)
+        if (leftPressed)
         {
-            // 모든 패들의 모터 속도를 반대로 하여 되돌아가게 함
-            leftMotor.motorSpeed = motorSpeed;
-            leftPaddle.motor = leftMotor;
-
-            rightMotor.motorSpeed = -motorSpeed;
-            rightPaddle.motor = rightMotor;
+            leftMotor.motorSpeed = -motorSpeed; // 위로 올리는 힘
         }
+        // 왼쪽이 눌리지 않았다면
+        else
+        {
+            leftMotor.motorSpeed = motorSpeed; // 아래로 내리는 힘 (원위치)
+        }
+
+        // 오른쪽이 눌렸다면 (rightPressed == true)
+        if (rightPressed)
+        {
+            rightMotor.motorSpeed = motorSpeed; // 위로 올리는 힘
+        }
+        // 오른쪽이 눌리지 않았다면
+        else
+        {
+            rightMotor.motorSpeed = -motorSpeed; // 아래로 내리는 힘 (원위치)
+        }
+
+        // 4. 계산된 모터 값을 실제 패들에 적용합니다.
+        leftPaddle.motor = leftMotor;
+        rightPaddle.motor = rightMotor;
     }
 }

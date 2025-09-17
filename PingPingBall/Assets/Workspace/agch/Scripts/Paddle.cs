@@ -2,77 +2,36 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    [Header("Paddle Identity")]
-    [Tooltip("이 패들이 왼쪽 패들이면 체크하세요.")]
-    public bool isLeftPaddle;
+    // [Header("Paddle Identity")] // AddForce 로직을 사용하지 않으므로 잠시 주석 처리
+    // [Tooltip("이 패들이 왼쪽 패들이면 체크하세요.")]
+    // public bool isLeftPaddle;
 
-    [Header("Bonus Kick Settings")]
-    public float tipBonusForce = 8f;
-    public float middleBonusForce = 4f;
-    [Tooltip("이 값보다 강하게 부딪혀야 보너스 킥이 발동됩니다.")]
-    public float minImpactVelocity = 1f;
+    // --- 부위별 AddForce 관련 로직을 모두 제거 또는 주석 처리했습니다 ---
 
-    [Header("Zone Definition")]
-    public float tipZoneThreshold = 1.2f;
-    public float middleZoneThreshold = 0.5f;
+    // [Header("Bonus Kick Settings")]
+    // public float tipBonusForce = 8f;
+    // public float middleBonusForce = 4f;
+    // public float minImpactVelocity = 1f;
 
-    private HingeJoint2D hingeJoint;
+    // [Header("Zone Definition")]
+    // public float tipZoneThreshold = 1.2f;
+    // public float middleZoneThreshold = 0.5f;
 
+    // private HingeJoint2D hingeJoint; // OnCollisionEnter2D를 사용하지 않으므로 필요 없음
+
+    /*
+    // Start와 OnCollisionEnter2D 함수 전체를 주석 처리하여 비활성화합니다.
     void Start()
     {
-        hingeJoint = GetComponent<HingeJoint2D>();
+        // hingeJoint = GetComponent<HingeJoint2D>();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // --- 조건 1: 패들이 '공을 치는 방향'으로 움직이고 있는가? ---
-        bool isMovingUpwards;
-        if (isLeftPaddle)
-        {
-            // 왼쪽 패들은 모터 속도가 음수일 때 위로 올라감
-            isMovingUpwards = hingeJoint.motor.motorSpeed < 0;
-        }
-        else
-        {
-            // 오른쪽 패들은 모터 속도가 양수일 때 위로 올라감
-            isMovingUpwards = hingeJoint.motor.motorSpeed > 0;
-        }
-
-        if (!isMovingUpwards)
-        {
-            return; // 위로 움직이는 게 아니면 아무것도 하지 않음
-        }
-
-        // --- 조건 2: 충돌 강도가 충분한가? ---
-        if (collision.relativeVelocity.magnitude < minImpactVelocity)
-        {
-            return; // 충격이 약하면 아무것도 하지 않음
-        }
-
-        // 모든 조건을 통과하고, 부딪힌 것이 'Ball' 태그를 가진 Rigidbody라면
-        if (collision.gameObject.CompareTag("Ball") && collision.rigidbody != null)
-        {
-            Rigidbody2D ballRigidbody = collision.rigidbody;
-
-            Vector2 collisionPoint = collision.contacts[0].point;
-            Vector2 pivotPoint = transform.TransformPoint(hingeJoint.anchor);
-            float distanceFromPivot = Vector2.Distance(collisionPoint, pivotPoint);
-            Vector2 forceDirection = collision.contacts[0].normal;
-            float forceMagnitude = 0f;
-
-            if (distanceFromPivot >= tipZoneThreshold)
-            {
-                forceMagnitude = tipBonusForce;
-            }
-            else if (distanceFromPivot >= middleZoneThreshold)
-            {
-                forceMagnitude = middleBonusForce;
-            }
-
-            if (forceMagnitude > 0)
-            {
-                ballRigidbody.AddForce(-forceDirection * forceMagnitude, ForceMode2D.Impulse);
-            }
-        }
+        // 이 안의 모든 로직이 비활성화됩니다.
     }
+    */
+
+    // 이 스크립트에는 이제 아무런 로직도 남아있지 않습니다.
+    // 패들의 모든 움직임은 PaddleController.cs와 Rigidbody2D, HingeJoint2D 컴포넌트가 처리합니다.
 }
