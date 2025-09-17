@@ -23,41 +23,48 @@ public class AL_PaddleController : MonoBehaviour
     {
         bool left = false;
         bool right = false;
-        int tcnt = Input.touchCount;
-        for (int i = 0; i < tcnt; i++)
+        // 에디터 환경이거나 웹 환경의 경우 입력 처리
+#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBGL
+        if (Input.GetMouseButton(0)) // 마우스 왼쪽 버튼이 눌려있는 동안
         {
-            if (Input.GetTouch(i).position.x < Screen.width / 2)
+            if (Input.mousePosition.x < Screen.width / 2)
                 left = true;
             else
                 right = true;
         }
-
-        // 화면에 마우스 클릭(또는 터치)이 있는지 확인
-        // 클릭된 위치가 화면의 중앙보다 왼쪽에 있는지 확인
+#else
+        // 모바일(iOS, Android) 빌드에서 입력 처리
+        if (Input.touchCount > 0)
+        {
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.position.x < Screen.width / 2)
+                    left = true;
+                else
+                    right = true;
+            }
+        }
+#endif
         if (left)
         {
-            // 왼쪽 패들 움직이기
             JointMotor2D motor = leftPaddle.motor;
-            motor.motorSpeed = -motorSpeed; // Hinge Joint의 회전 방향에 따라 부호 조절
+            motor.motorSpeed = -motorSpeed;
             leftPaddle.motor = motor;
         }
-        if (right) // 화면 오른쪽에 클릭이 있다면
-        {
-            // 오른쪽 패들 움직이기
-            JointMotor2D motor = rightPaddle.motor;
-            motor.motorSpeed = motorSpeed; // Hinge Joint의 회전 방향에 따라 부호 조절
-            rightPaddle.motor = motor;
-        }
-
-        // 화면에서 손을 뗐을 때 패들을 원위치로
-        // 모든 패들의 모터 속도를 반대로 하여 되돌아가게 함
-        if (!left)
+        else
         {
             JointMotor2D motor = leftPaddle.motor;
             motor.motorSpeed = motorSpeed;
             leftPaddle.motor = motor;
         }
-        if (!right)
+
+        if (right)
+        {
+            JointMotor2D motor = rightPaddle.motor;
+            motor.motorSpeed = motorSpeed;
+            rightPaddle.motor = motor;
+        }
+        else
         {
             JointMotor2D motor = rightPaddle.motor;
             motor.motorSpeed = -motorSpeed;
