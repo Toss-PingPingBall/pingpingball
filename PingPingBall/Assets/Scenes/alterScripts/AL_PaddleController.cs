@@ -9,7 +9,7 @@ public class AL_PaddleController : MonoBehaviour
     public HingeJoint2D rightPaddle;
 
     // 패들이 움직이는 힘(모터의 속도)
-    public float motorSpeed = 1200f;
+    public float motorSpeed = 1000f;
 
     private JointMotor2D leftMotor, rightMotor;
 

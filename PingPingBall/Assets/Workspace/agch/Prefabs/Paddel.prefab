@@ -472,4 +472,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftPaddle: {fileID: 3865033062521060664}
   rightPaddle: {fileID: 6756999377405481330}
-  motorSpeed: 1200
+  motorSpeed: 400
