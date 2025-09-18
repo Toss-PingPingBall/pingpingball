@@ -6,6 +6,14 @@ public class UiMgrScript : MonoBehaviour
     [Header("ui")]
     public StartGame start_ui;
     public TMPro.TMP_Text score_ui;
+    public UI_Button stopBt_ui;
+
+    [Header("ui - info")]
+    public UI_View_Info info_ui;
+    public UI_Button infoBt_ui;
+
+    [Header("ui - stop")]
+    public UI_GameOver gameover_ui;
 
     // ======================== Game Initializer ==========================
 
@@ -18,25 +26,24 @@ public class UiMgrScript : MonoBehaviour
     {
         warnNullProperty(start_ui == null, nameof(start_ui));
         warnNullProperty(score_ui == null, nameof(score_ui));
+        warnNullProperty(stopBt_ui == null, nameof(stopBt_ui));
+
+        warnNullProperty(info_ui == null, nameof(info_ui));
+        warnNullProperty(infoBt_ui == null, nameof(infoBt_ui));
 
         if (start_ui != null)
-        {
-            start_ui.onStarted += onUiStarted;
-            start_ui.onClosed += onUiClosed;
             start_ui.onClosed += gameStarted;
-        }
+
+        if (infoBt_ui != null)
+            infoBt_ui.onClick += startInfoView;
     }
 
     // ======================== internal process ==========================
 
-    private void onUiStarted()
+    private void startInfoView()
     {
-        GameManager.instance.onUi = true;
-    }
-
-    private void onUiClosed()
-    {
-        GameManager.instance.onUi = false;
+        if (info_ui != null)
+            info_ui.gameObject.SetActive(true);
     }
 
     // ======================== external process ==========================

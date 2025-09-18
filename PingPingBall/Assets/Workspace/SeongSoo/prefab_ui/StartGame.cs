@@ -6,11 +6,12 @@ public class StartGame : MonoBehaviour
 {
     private bool doStarted = false;
     public Action onClosed;
-    public Action onStarted;
 
-    void Start()
+    private void OnEnable() { GameManager.instance.onUi = true; }
+    private void OnDisable()
     {
-        onStarted?.Invoke();
+        onClosed?.Invoke(); 
+        GameManager.instance.onUi = false; 
     }
 
     // Update is called once per frame
@@ -20,7 +21,6 @@ public class StartGame : MonoBehaviour
             if (!doStarted)
             {
                 doStarted = true;
-                onClosed?.Invoke();
                 gameObject.SetActive(false);
             }
     }
