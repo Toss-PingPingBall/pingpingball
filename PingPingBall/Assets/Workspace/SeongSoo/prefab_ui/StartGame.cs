@@ -5,12 +5,13 @@ using System;
 public class StartGame : MonoBehaviour
 {
     private bool doStarted = false;
-    public Action whenStart;
 
-    private void Awake()
-    {
-        GameManager.instance.onUi = true;
-    }
+    public Action onGameStart;
+    public Action onShow;
+    public Action onClosed;
+
+    private void OnEnable() { onShow?.Invoke(); }
+    private void OnDisable() { onClosed?.Invoke(); }
 
     // Update is called once per frame
     void Update()
@@ -19,8 +20,8 @@ public class StartGame : MonoBehaviour
             if (!doStarted)
             {
                 doStarted = true;
-                GameManager.instance.onUi = false;
-                whenStart();
+                onGameStart?.Invoke();
+                gameObject.SetActive(false);
             }
     }
 }

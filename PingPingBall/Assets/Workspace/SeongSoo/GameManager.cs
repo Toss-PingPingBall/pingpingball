@@ -23,36 +23,16 @@ public class GameManager
         onUi = true;
     }
 
-    // ======================== Game System ==========================
-
-    // ------ properties ------ 
+    // ======================== External Events ==========================
 
     public Action scoreChanged;
+    public Action<bool> onUiChanged;
 
-    private int _score;
-    public int score { get { return _score; } private set { _score = value; scoreChanged?.Invoke(); } }
-    public int allowedRevival { get; private set; }
-    public bool onUi { get; set; }
-
-    // ------ setter ------ 
-
-    public bool canRevive() 
-    { 
-        return (allowedRevival <= 0); 
-    }
-
-    public void revive()
-    {
-        if (!canRevive())
-            throw new Exception("더 이상 부활할 기회가 없습니다!");
-        allowedRevival--;
-    }
-
-    // ------ score ------ 
+    // ------ score functions ------ 
 
     private float[] timer = new float[4];
     private int blocks = 0;
-    
+
     private void blockBonus()
     {
         if (timer.Length <= blocks)
@@ -77,7 +57,7 @@ public class GameManager
 
     public void addCollisionScore(EntityType type)
     {
-        switch(type)
+        switch (type)
         {
             case EntityType.COIN:
                 score += 100;
@@ -98,5 +78,34 @@ public class GameManager
                 score += 30;
                 break;
         }
+    }
+
+    // ======================== Game System ==========================
+
+    // ------ properties ------ 
+
+    private int _score;
+    public int score { get { return _score; } private set { _score = value; scoreChanged?.Invoke(); } }
+    public int allowedRevival { get; private set; }
+    private bool _onUi;
+    public bool onUi { get { return _onUi; } private set { _onUi = value; onUiChanged?.Invoke(_onUi); } }
+
+    // ------ setter ------ 
+
+    public bool canRevive() 
+    { 
+        return (allowedRevival <= 0); 
+    }
+
+    public void revive()
+    {
+        if (!canRevive())
+            throw new Exception("더 이상 부활할 기회가 없습니다!");
+        allowedRevival--;
+    }
+
+    public void changeOnUi(bool isOnUi)
+    {
+        onUi = isOnUi;
     }
 }

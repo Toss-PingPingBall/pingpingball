@@ -2,18 +2,14 @@ using UnityEngine;
 
 public class GmScript : MonoBehaviour
 {
+    [Header("game object")]
     public GameObject ball;
-    public StartGame start_ui;
     public BlockSpawner blockSpawner;
     public ItemSpawner itemSpawner;
     public CoinSpawner coinSpawner;
-    public TMPro.TMP_Text score_ui;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
-    {
-        initalize();
-    }
+    [Header("game manager scripts")]
+    public UiMgrScript uiMgr;
 
     // Update is called once per frame
     void Update()
@@ -26,25 +22,41 @@ public class GmScript : MonoBehaviour
 
     // ======================== Game Initializer ==========================
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {
+        initalize();
+    }
+
+    private void warnNullProperty(bool isNull, string name)
+    {
+        if (isNull) Debug.LogWarning("[" + gameObject.name + "] : " + name + "이 등록되지 않았습니다.");
+    }
+
     private void initalize()
     {
-        start_ui.whenStart += startGame;
-        GameManager.instance.scoreChanged += changeScore;
-        changeScore();
+        uiMgr.initalize();
+        uiMgr.onGameStartedEvent += startGame;
 
-        blockSpawner.gameObject.SetActive(false);
-        itemSpawner.gameObject.SetActive(false);
-        coinSpawner.gameObject.SetActive(false);
+        GameManager.instance.scoreChanged += () => uiMgr.changeScore(GameManager.instance.score);
+
+        warnNullProperty(ball == null, nameof(ball));
+        warnNullProperty(blockSpawner == null, nameof(blockSpawner));
+        warnNullProperty(itemSpawner == null, nameof(itemSpawner));
+        warnNullProperty(coinSpawner == null, nameof(coinSpawner));
+        
+        blockSpawner?.gameObject.SetActive(false);
+        itemSpawner?.gameObject.SetActive(false);
+        coinSpawner?.gameObject.SetActive(false);
     }
 
     // ======================== Game Starter ==========================
 
     private void startGame()
     {
-        start_ui.gameObject.SetActive(false);
-        blockSpawner.gameObject.SetActive(true);
-        itemSpawner.gameObject.SetActive(true);
-        coinSpawner.gameObject.SetActive(true);
+        blockSpawner?.gameObject.SetActive(true);
+        itemSpawner?.gameObject.SetActive(true);
+        coinSpawner?.gameObject.SetActive(true);
     }
 
     // ======================== Pause System ==========================
@@ -55,6 +67,8 @@ public class GmScript : MonoBehaviour
 
     private void processPause()
     {
+        if (ball == null) return;
+
         if (GameManager.instance.onUi && !ballPaused)
         {
             Rigidbody2D rigidbody = ball.GetComponent<Rigidbody2D>();
@@ -73,12 +87,5 @@ public class GmScript : MonoBehaviour
 
             ballPaused = false;
         }
-    }
-
-    // ======================== Score Display System ==========================
-
-    private void changeScore()
-    {
-        score_ui.text = string.Format("{0:#,##0}", GameManager.instance.score);
     }
 }
