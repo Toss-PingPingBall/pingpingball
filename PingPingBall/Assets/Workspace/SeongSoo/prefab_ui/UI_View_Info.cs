@@ -9,6 +9,11 @@ public class UI_View_Info : MonoBehaviour
     private void OnEnable() { GameManager.instance.onUi = true; }
     private void OnDisable() { GameManager.instance.onUi = false; }
 
+    public void show()
+    {
+        gameObject.SetActive(true);
+    }
+
     private void Start()
     {
         if (closeBtn == null)

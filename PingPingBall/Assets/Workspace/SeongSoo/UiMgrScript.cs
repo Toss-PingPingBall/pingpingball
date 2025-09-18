@@ -14,6 +14,7 @@ public class UiMgrScript : MonoBehaviour
 
     [Header("ui - stop")]
     public UI_GameOver gameover_ui;
+    public UI_Pause pause_ui;
 
     // ======================== Game Initializer ==========================
 
@@ -35,15 +36,10 @@ public class UiMgrScript : MonoBehaviour
             start_ui.onClosed += gameStarted;
 
         if (infoBt_ui != null)
-            infoBt_ui.onClick += startInfoView;
-    }
+            infoBt_ui.onClick += () => info_ui?.show();
 
-    // ======================== internal process ==========================
-
-    private void startInfoView()
-    {
-        if (info_ui != null)
-            info_ui.gameObject.SetActive(true);
+        if (stopBt_ui != null)
+            stopBt_ui.onClick += () => pause_ui?.show(GameManager.instance.score, 1);
     }
 
     // ======================== external process ==========================
@@ -57,5 +53,10 @@ public class UiMgrScript : MonoBehaviour
     {
         if (score_ui != null)
             score_ui.text = string.Format("{0:#,##0}", score);
+    }
+
+    public void gameOver()
+    {
+        gameover_ui?.show(GameManager.instance.score, 1);
     }
 }
