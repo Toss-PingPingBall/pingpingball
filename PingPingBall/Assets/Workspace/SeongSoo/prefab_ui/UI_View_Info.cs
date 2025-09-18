@@ -6,8 +6,15 @@ public class UI_View_Info : MonoBehaviour
     [SerializeField]
     private UI_Button closeBtn;
 
-    private void OnEnable() { GameManager.instance.onUi = true; }
-    private void OnDisable() { GameManager.instance.onUi = false; }
+    // ======================== UI External Event ==========================
+
+    public Action onShow;
+    public Action onClosed;
+    
+    // =======================================================================
+
+    private void OnEnable() { onShow?.Invoke(); }
+    private void OnDisable() { onClosed?.Invoke(); }
 
     public void show()
     {

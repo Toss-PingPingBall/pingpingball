@@ -32,20 +32,43 @@ public class UiMgrScript : MonoBehaviour
         warnNullProperty(info_ui == null, nameof(info_ui));
         warnNullProperty(infoBt_ui == null, nameof(infoBt_ui));
 
-        if (start_ui != null)
-            start_ui.onClosed += gameStarted;
+        if (start_ui != null) { start_ui.onShow += openUi;  start_ui.onClosed += closeUi; }
+        if (gameover_ui != null) { gameover_ui.onShow += openUi; gameover_ui.onClosed += closeUi; }
+        if (pause_ui != null) { pause_ui.onShow += openUi; pause_ui.onClosed += closeUi; }
+        if (info_ui != null) { info_ui.onShow += openUi; info_ui.onClosed += closeUi; }
 
-        if (infoBt_ui != null)
-            infoBt_ui.onClick += () => info_ui?.show();
+        if (start_ui != null) start_ui.onGameStart += gameStarted;
 
-        if (stopBt_ui != null)
-            stopBt_ui.onClick += () => pause_ui?.show(GameManager.instance.score, 1);
+        if (infoBt_ui != null) infoBt_ui.onClick += () => info_ui?.show();
+        if (stopBt_ui != null) stopBt_ui.onClick += () => pause_ui?.show(GameManager.instance.score, 1);
+    }
+
+    // ======================== internal process ==========================
+
+    private void gameStarted()
+    {
+        onGameStartedEvent?.Invoke();
+    }
+
+    private int runningUiCnt = 0;
+
+    private void openUi()
+    {
+        runningUiCnt++;
+        if (1 == runningUiCnt)
+            GameManager.instance.changeOnUi(true);
+    }
+
+    private void closeUi()
+    {
+        runningUiCnt--;
+        if (0 == runningUiCnt)
+            GameManager.instance.changeOnUi(false);
     }
 
     // ======================== external process ==========================
 
     public Action onGameStartedEvent;
-    private void gameStarted() { onGameStartedEvent?.Invoke(); }
 
     // ======================== operations ==========================
 

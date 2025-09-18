@@ -814,6 +814,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 4634219599474103426, guid: 46d9ac2a795f1494380406c60a8c99f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6475276189435859407, guid: 46d9ac2a795f1494380406c60a8c99f9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -921,6 +925,10 @@ PrefabInstance:
     - target: {fileID: 1299655979745838091, guid: d8b1638957ca8a6469a9d82eea962215, type: 3}
       propertyPath: m_Name
       value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 1299655979745838091, guid: d8b1638957ca8a6469a9d82eea962215, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7044267925393712672, guid: d8b1638957ca8a6469a9d82eea962215, type: 3}
       propertyPath: m_Pivot.x
@@ -1098,6 +1106,10 @@ PrefabInstance:
     - target: {fileID: 8786561822222825465, guid: 34bda012045b5cb4e8b2bd92aef5a4fc, type: 3}
       propertyPath: m_Name
       value: Info
+      objectReference: {fileID: 0}
+    - target: {fileID: 8786561822222825465, guid: 34bda012045b5cb4e8b2bd92aef5a4fc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

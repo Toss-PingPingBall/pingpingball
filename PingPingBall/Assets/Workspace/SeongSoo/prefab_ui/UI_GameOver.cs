@@ -14,6 +14,8 @@ public class UI_GameOver : MonoBehaviour
     // ======================== UI External Event ==========================
 
     public Action onReplay;
+    public Action onShow;
+    public Action onClosed;
 
     // ======================== UI Operation Method ==========================
 
@@ -26,8 +28,8 @@ public class UI_GameOver : MonoBehaviour
 
     // =======================================================================
 
-    private void OnEnable() { GameManager.instance.onUi = true; }
-    private void OnDisable() { GameManager.instance.onUi = false; }
+    private void OnEnable() { onShow?.Invoke(); }
+    private void OnDisable() { onClosed?.Invoke(); }
 
     private void Start()
     {

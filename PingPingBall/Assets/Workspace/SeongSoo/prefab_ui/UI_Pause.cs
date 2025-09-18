@@ -17,6 +17,8 @@ public class UI_Pause : MonoBehaviour
 
     public Action onResume;
     public Action onReplay;
+    public Action onShow;
+    public Action onClosed;
 
     // ======================== UI Operation Method ==========================
 
@@ -29,8 +31,8 @@ public class UI_Pause : MonoBehaviour
 
     // =======================================================================
 
-    private void OnEnable() { GameManager.instance.onUi = true; }
-    private void OnDisable() { GameManager.instance.onUi = false; }
+    private void OnEnable() { onShow?.Invoke(); }
+    private void OnDisable() { onClosed?.Invoke(); }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
