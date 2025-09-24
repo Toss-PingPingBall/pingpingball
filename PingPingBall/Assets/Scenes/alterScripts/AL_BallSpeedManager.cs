@@ -6,12 +6,6 @@ public class AL_BallSpeedManager : MonoBehaviour
     [Tooltip("공이 절대로 넘을 수 없는 속도 상한선")]
     public float maxSpeedLimit = 25f;
 
-    [Header("Keyboard Test Settings")]
-    [Tooltip("↑ 키를 눌렀을 때 속도가 곱해지는 배율")]
-    public float speedUpMultiplier = 1.5f;
-    [Tooltip("↓ 키를 눌렀을 때 속도가 곱해지는 배율")]
-    public float speedDownMultiplier = 0.7f;
-
     private Rigidbody2D rb;
     private float currentMaxSpeed = 0f; // 최고 속도 기록용 (디버그)
 
@@ -46,6 +40,25 @@ public class AL_BallSpeedManager : MonoBehaviour
             pos.y = -16f;
             transform.localPosition = pos;
             gameObject.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // 부딪힌 오브젝트의 태그를 확인
+        string tag = collision.gameObject.tag;
+
+        // 태그가 "Block" 이거나 "Wall" 일 때 (Block은 일단 보류)
+        if (tag == "Block" || tag == "Wall")
+        {
+            // 1. 충돌 지점의 법선 벡터(표면에 수직인 방향) 참조
+            Vector2 normal = collision.contacts[0].normal;
+
+            // 2. 법선 벡터를 90도 회전시켜 표면과 평행한 '미끄러질 방향'을 계산
+            Vector2 slideDirection = new Vector2(-normal.y, normal.x);
+
+            // 3. 계산된 '미끄러질 방향'으로 아주 작은 힘 부여(제자리에서만 튀기는 버그 방지용)
+            rb.AddForce(slideDirection * 0.01f, ForceMode2D.Impulse);
         }
     }
 }
