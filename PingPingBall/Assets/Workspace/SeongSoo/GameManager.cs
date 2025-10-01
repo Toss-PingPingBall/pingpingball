@@ -27,6 +27,7 @@ public class GameManager
 
     public Action scoreChanged;
     public Action<bool> onUiChanged;
+    public Action<float> onBallSizeChanged; // 공 크기 확대 효과 적용/시간 갱신 이벤트 (float duration 전달)
 
     // ------ score functions ------ 
 
@@ -80,6 +81,46 @@ public class GameManager
         }
     }
 
+    public void applyBallSizeUp(float duration) // 공 크기 확대 효과 적용 및 지속 시간 설정
+    {
+        onBallSizeChanged?.Invoke(duration);
+    }
+
+    public void cancelBallSizeUp() // 공 크기 확대 효과 해제
+    {
+        onBallSizeChanged?.Invoke(0f);
+    }
+
+    public void invokeCollisionProcess(GameObject go) // 공이 충돌한 오브젝트를 처리하는 중앙 메소드
+    {
+        if (go.CompareTag("Coin"))
+        {
+            addCollisionScore(EntityType.COIN);
+            UnityEngine.Object.Destroy(go);
+            return;
+        }
+
+        if (go.CompareTag("ItemSizeUp"))
+        {
+            applyBallSizeUp(10.0f); // 지속 시간을 10.0초로 설정
+            UnityEngine.Object.Destroy(go);
+            return;
+        }
+
+        if (go.name.Contains("Block"))
+        {
+            if (go.name.Contains("OneShot"))
+            {
+                addCollisionScore(EntityType.BLOCK_ONE_SHOT);
+            }
+            else
+            {
+                addCollisionScore(EntityType.BLOCK_DEFAULT);
+            }
+            return;
+        }
+    }
+
     // ======================== Game System ==========================
 
     // ------ properties ------ 
@@ -92,9 +133,9 @@ public class GameManager
 
     // ------ setter ------ 
 
-    public bool canRevive() 
-    { 
-        return (allowedRevival <= 0); 
+    public bool canRevive()
+    {
+        return (allowedRevival <= 0);
     }
 
     public void revive()
