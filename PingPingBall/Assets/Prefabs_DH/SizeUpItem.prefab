@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9035035671050302142}
   m_Layer: 0
   m_Name: SizeUpItem
-  m_TagString: Untagged
+  m_TagString: ItemSizeUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

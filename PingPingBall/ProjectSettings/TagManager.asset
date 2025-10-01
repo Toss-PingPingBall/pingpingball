@@ -8,6 +8,7 @@ TagManager:
   - Coin
   - Paddle
   - Wall
+  - ItemSizeUp
   layers:
   - Default
   - TransparentFX
